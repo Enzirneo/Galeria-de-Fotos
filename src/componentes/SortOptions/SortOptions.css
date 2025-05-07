@@ -1,0 +1,30 @@
+/* SortOptions.css */
+
+.sort-container {
+  display: flex;
+  max-width: 200px;
+  justify-content: left;
+  margin-left: 15px;
+  margin-bottom: 3.5rem;
+}
+
+.sort-select {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  border: 1px solid;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.sort-light {
+  background-color: #ffffff;
+  color: #1f2937; /* text-gray-800 */
+  border-color: #d1d5db; /* border-gray-300 */
+}
+
+.sort-dark {
+  background-color: #374151; /* bg-gray-700 */
+  color: #ffffff;
+  border-color: #4b5563; /* border-gray-600 */
+}

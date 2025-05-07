@@ -1,0 +1,44 @@
+/* Container com scroll horizontal se necessário */
+.category-scroll-container {
+  overflow-x: auto;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-container {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+  min-width: max-content;
+}
+
+/* Botões */
+.category-button {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.category-light {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #1f2937; /* gray-800 */
+}
+
+.category-dark {
+  background-color: #4b5563; /* gray-600 */
+  color: #ffffff;
+}
+
+.category-active-light {
+  background-color: #272727; /* blue-500 */
+  color: #ffffff;
+}
+
+.category-active-dark {
+  background-color: #32405e; /* blue-600 */
+  color: #ffffff;
+}

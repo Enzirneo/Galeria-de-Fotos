@@ -1,0 +1,93 @@
+/* Estilos base */
+.upload-form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+button.upload-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Modo Claro */
+.upload-light {
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+.upload-light input,
+.upload-light select {
+  background-color: #ffffff;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+}
+
+.upload-light label {
+  color: #1f2937;
+}
+
+.upload-light button.upload-button {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.upload-light button.upload-button:hover {
+  background-color: #d1d5db;
+  color: #1f2937;
+}
+
+/* Modo Escuro */
+.upload-dark {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+.upload-dark input,
+.upload-dark select {
+  background-color: #2d3748;
+  color: #ffffff;
+  border: 1px solid #4b5563;
+}
+
+.upload-dark label {
+  color: #ffffff;
+}
+
+.upload-dark button.upload-button {
+  background-color: #4b5563;
+  color: #ffffff;
+}
+
+.upload-dark button.upload-button:hover {
+  background-color: #1f2937;
+  color: #ffffff;
+}

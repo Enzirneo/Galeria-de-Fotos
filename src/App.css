@@ -1,0 +1,126 @@
+/* App.css */
+
+/* Garantir que html e body ocupem toda a altura da tela */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.grid {
+  padding: 0 20rem; /* Adiciona espaçamento nas laterais */
+}
+
+/* Adaptação de padding lateral em telas maiores */
+@media (min-width: 768px) {
+  .grid {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    padding: 0 4rem;
+  }
+}
+
+/* Manter a área principal do conteúdo flexível */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Garantir que o conteúdo de cada seção também seja responsivo */
+header, .content, footer {
+  width: 100%;
+}
+
+.upload-label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.upload-button {
+  background-color: #E5E7EB;
+  color: rgb(0, 0, 0);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+  background-color: #272727;
+  color: #ffffff;
+}
+
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+input,
+button {
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  transition: all 0.3s;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+  border-color: #1d1e20;
+}
+
+.upload-light {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* Estilo para o modo escuro */
+body.dark {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+body.dark .theme-light {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark .theme-dark {
+  background-color: #222;
+  color: #fff;
+}
+
+body.dark input,
+body.dark button {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+body.dark input:focus,
+body.dark button:focus {
+  border-color: #1d1e20;
+}
+
+.upload-dark {
+  background-color: #4b5563;
+  color: #ffffff;
+}
+
+.upload-dark:hover {
+  background-color: #32405E;
+}

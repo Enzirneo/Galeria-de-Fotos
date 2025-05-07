@@ -1,0 +1,44 @@
+.header {
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .header-light {
+    background-color: #F3F4F6;
+    color: #1f2937;
+  }
+  
+  .header-dark {
+    background-color: #1f2937;
+    color: #ffffff;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .theme-toggle {
+    position: absolute;
+    right: 1rem;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: background-color 0.3s, color 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .theme-light {
+    background-color: #e5e7eb;
+    color: #1f2937;
+  }
+  
+  .theme-dark {
+    background-color: #4b5563;
+    color: #ffffff;
+  }
+  
