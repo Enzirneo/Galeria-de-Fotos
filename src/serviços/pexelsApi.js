@@ -4,7 +4,7 @@ const API_KEY = 'ZY1yqv5DynMBY9BRgGsaGE9ydBOgaiWgfS6oqA0FeerOmOjURwdH9sF5';
 const BASE_URL = 'https://api.pexels.com/v1';
 
 // Função para buscar e adaptar as fotos da API para o formato da aplicação
-export const searchPhotos = async (query = 'nature', perPage = 32) => {
+export const searchPhotos = async (query = 'nature', perPage = 100) => {
   try {
     const response = await axios.get(`${BASE_URL}/search`, {
       headers: {

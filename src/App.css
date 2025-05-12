@@ -124,3 +124,70 @@ body.dark button:focus {
 .upload-dark:hover {
   background-color: #32405E;
 }
+
+
+/* Botão flutuante de upload */
+.floating-upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  line-height: 0; /* Reduz o espaço vertical do emoji */
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.floating-upload-button span {
+  position: relative;
+  top: -4px; /* Ajuste o valor conforme necessário */
+}
+
+.floating-upload-button:hover {
+  background-color: #4338ca; /* Indigo-700 */
+  transform: scale(1.1);
+}
+
+/* Tema escuro para o botão flutuante */
+.upload-dark.floating-upload-button {
+  background-color: #374151; /* Gray-700 */
+}
+
+.upload-dark.floating-upload-button:hover {
+  background-color: #1f2937; /* Gray-800 */
+}
+
+/* Tooltip para o botão flutuante */
+.floating-upload-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.floating-upload-wrapper .tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 10px;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  white-space: nowrap;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.floating-upload-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+

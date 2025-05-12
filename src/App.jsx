@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "./componentes/Header";
-import SearchBar from "./componentes/SearchBar";
 import CategoryFilter from "./componentes/CategoryFilter";
 import SortOptions from "./componentes/SortOptions";
 import Gallery from "./componentes/Gallery";
@@ -20,7 +19,7 @@ export default function App() {
   const [favorites, setFavorites] = useState([]);
   const [pexelsPhotos, setPexelsPhotos] = useState([]);
 
-  const categories = ["Todas", "Enviadas", "Favoritas", "Natureza", "Urbano", "Animais", "Tecnologia", "Pessoas"];
+  const categories = ["Todas", "Enviadas", "Favoritas", "Natureza", "Urbano", "Animais", "Tecnologia", "Pessoas", "Comida", "Carros", "Cores"];
 
   const handleImageUpload = (name, category, url, date) => {
     const newPhoto = {
@@ -34,23 +33,26 @@ export default function App() {
   };
 
   useEffect(() => {
-    const fetchPexelsPhotos = async () => {
-      const query =
-        searchTerm ||
-        (selectedCategory !== "Todas" &&
-        selectedCategory !== "Favoritas" &&
-        selectedCategory !== "Enviadas"
-          ? selectedCategory
-          : "nature");
+    const fetchMultipleCategories = async () => {
+      const queries = ["Natureza", "Urbano", "Animais", "Tecnologia", "Pessoas", "Comida", "Carros", "Cores"];
 
-      const results = await searchPhotos(query);
+      const allResults = await Promise.all(
+        queries.map(async (query) => {
+          const results = await searchPhotos(query, 8);
+          return results.map((photo, index) => ({
+            ...photo,
+            category: query,
+            id: `pexels-${query}-${photo.id}`,
+            date: new Date(Date.now() - index * 86400000).toISOString().split("T")[0],
+          }));
+        })
+      );
 
-      console.log("Fotos da API Pexels:", results);
-
-      setPexelsPhotos(results); // ✅ Não mapeia novamente — já vem no formato certo
+      const flattened = allResults.flat();
+      setPexelsPhotos(flattened);
     };
 
-    fetchPexelsPhotos();
+    fetchMultipleCategories();
   }, []);
 
   const allPhotos = [...userPhotos, ...pexelsPhotos];
@@ -63,15 +65,18 @@ export default function App() {
 
   const filteredPhotos = allPhotos
     .filter((photo) => {
-      const matchesSearch = photo.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch =
+        photo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (photo.category && photo.category.toLowerCase().includes(searchTerm.toLowerCase()));
+
       const matchesCategory =
         selectedCategory === "Todas"
           ? true
           : selectedCategory === "Favoritas"
-            ? favorites.includes(photo.id)
-            : selectedCategory === "Enviadas"
-              ? userPhotos.some((p) => p.id === photo.id)
-              : photo.category === selectedCategory;
+          ? favorites.includes(photo.id)
+          : selectedCategory === "Enviadas"
+          ? userPhotos.some((p) => p.id === photo.id)
+          : photo.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     })
@@ -85,19 +90,13 @@ export default function App() {
 
   return (
     <div className={`App ${isDark ? "bg-gray-800 text-white" : "bg-white text-gray-900"} min-h-screen`}>
-      <Header isDark={isDark} toggleTheme={() => setIsDark(!isDark)} />
+      <Header
+        isDark={isDark}
+        toggleTheme={() => setIsDark(!isDark)}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <div className="main-content flex-grow">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} isDark={isDark} />
-
-        <div className="px-4 my-4">
-          <button
-            onClick={() => setShowUpload(true)}
-            className={`upload-button ${isDark ? "upload-dark" : "upload-light"}`}
-          >
-            📷 Enviar nova imagem
-          </button>
-        </div>
-
 
         <CategoryFilter
           photos={allPhotos}
@@ -107,7 +106,7 @@ export default function App() {
         />
 
         <SortOptions sortOption={sortOption} setSortOption={setSortOption} isDark={isDark} />
-
+        
         <Gallery
           photos={filteredPhotos}
           onPhotoClick={setSelectedPhoto}
@@ -119,7 +118,7 @@ export default function App() {
         {selectedPhoto && (
           <Modal photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} isDark={isDark} />
         )}
-
+        
         {showUpload && (
           <UploadForm
             handleImageUpload={handleImageUpload}
@@ -128,6 +127,18 @@ export default function App() {
             isDark={isDark}
           />
         )}
+
+        {/* Botão flutuante com tooltip */}
+        <div className="floating-upload-wrapper">
+          <div className="tooltip">Nova imagem</div>
+          <button
+            onClick={() => setShowUpload(true)}
+            className={`floating-upload-button ${isDark ? "upload-dark" : "upload-light"}`}
+          >
+            <span>📷</span>
+          </button>
+        </div>
+
       </div>
     </div>
   );
