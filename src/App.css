@@ -1,6 +1,5 @@
 /* App.css */
 
-/* Garantir que html e body ocupem toda a altura da tela */
 html, body {
   height: 100%;
   margin: 0;
@@ -149,7 +148,7 @@ body.dark button:focus {
 }
 
 .floating-upload-button:hover {
-  background-color: #4338ca; /* Indigo-700 */
+  background-color: #1f1f1f; /* Indigo-700 */
   transform: scale(1.1);
 }
 
