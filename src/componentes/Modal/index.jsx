@@ -3,6 +3,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./Modal.css";
 
 export default function Modal({ photo, onClose, isDark }) {
+
+  const handleDownload = async (url, filename = "imagem.jpg") => {
+    try {
+      const response = await fetch(url, { mode: 'cors' });
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Erro ao baixar a imagem:", error);
+    }
+  };
+
   return (
     <AnimatePresence>
       {photo && (
@@ -12,7 +32,6 @@ export default function Modal({ photo, onClose, isDark }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {/* Botão de fechar fora do conteúdo */}
           <button
             className="modal-close-btn"
             onClick={onClose}
@@ -32,6 +51,13 @@ export default function Modal({ photo, onClose, isDark }) {
             <div>
               <h2 className="modal-title">{photo.title}</h2>
               <p className="modal-category">{photo.category}</p>
+
+              <button
+                onClick={() => handleDownload(photo.url, `${photo.title || "imagem"}.jpg`)}
+                className={`modal-download-btn ${isDark ? "download-dark" : "download-light"}`}
+              >
+                 Baixar imagem
+              </button>
             </div>
           </motion.div>
         </motion.div>
