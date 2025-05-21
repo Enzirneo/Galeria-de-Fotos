@@ -40,8 +40,11 @@ export default function PhotoCard({ photo, onClick, isDark, favorites, toggleFav
             {heartIcon}
           </button>
         </div>
-        <p className="photo-category">{photo.category ?? "Sem categoria"}</p>
-        {photo.date && <p className="photo-date">📅 {photo.date}</p>}
+        
+        <div className="footer-card">
+          <p className="photo-category">{photo.category ?? "Sem categoria"}</p>
+          {photo.date && <p className="photo-date">📅 {photo.date}</p>}
+        </div>
       </div>
     </motion.div>
   );
